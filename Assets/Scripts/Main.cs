@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using UnityEngine.EventSystems;
-using UnityEngine.Networking;
-using System.Collections;
-using System.Net.Sockets;
-using UnityEngine.Video;
-using UnityEngine.UI;
-using UnityEngine;
-using System.Net;
-using System.IO;
+﻿using SFB;
 using System;
-using SFB;
+using System.IO;
+using System.Net;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Video;
+using System.Net.Sockets;
+using System.Collections;
+using UnityEngine.Networking;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class Main : MonoBehaviour {
 
@@ -26,9 +26,6 @@ public class Main : MonoBehaviour {
 	[SerializeField] private Text selectedVideoTimeText;
 	[SerializeField] private GameObject selectedVideoModal;
 	[SerializeField] private VideoPlayer player;
-	public bool isPlaying = false;
-	public bool isPrepared = false;
-	public bool etc;
 	private string downloadDir;
 	private string fileList;
 	private string camIP;
@@ -41,10 +38,6 @@ public class Main : MonoBehaviour {
 	}
 
 	void Update() {
-		isPrepared = player.isPrepared;
-		isPlaying = player.isPlaying;
-		
-
 		if (player.isPlaying && rotatingLoaderGameObject.activeSelf) {
 			rotatingLoaderGameObject.SetActive(false);
 		} else if (player.isPrepared && !player.isPlaying && !rotatingLoaderGameObject.activeSelf) {
