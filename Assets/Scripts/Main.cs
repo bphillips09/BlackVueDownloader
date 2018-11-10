@@ -68,6 +68,7 @@ public class Main : MonoBehaviour {
 
 		if (!informModalGameObject.activeSelf) {
 			informModalGameObject.SetActive(true);
+			CloseLoadingModal();
 			EventSystem.current.SetSelectedGameObject(null);
 		}
 	}
@@ -229,6 +230,13 @@ public class Main : MonoBehaviour {
 
 	IEnumerator GetFileList(string ipAddress) {
 		OpenLoadingModal("Getting File List...");
+		IPAddress testIP;
+		if (!IPAddress.TryParse(ipAddress, out testIP)) {
+			InformUser("IP Address is not valid!");
+			StopAllCoroutines();
+			yield return null;
+		}
+
 		using (UnityWebRequest www = UnityWebRequest.Get("http://" + ipAddress + "/blackvue_vod.cgi")) {
 			www.timeout = 5;
 			yield return www.SendWebRequest();
